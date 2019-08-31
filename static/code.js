@@ -1,6 +1,9 @@
 const ws = new WebSocket('wss://acceleromate.herokuapp.com');
 const json = document.querySelector('.json');
 
+
+const speedIndex = 5;
+
 const main = () => {
   const isMobile = window.innerWidth < 960;
 
@@ -22,14 +25,14 @@ const main = () => {
 }
 
 const drawDot = (el, {x,y}) => {
-  el.style.transform = `translate(${x}px, ${y}px)`
+  el.style.transform = `translate(${x * speedIndex}px, ${y * speedIndex}px)`
 }
 
 const handleOrinationChange = (event) => {
 
   const data = {
-    alpha: Number.parseFloat(event.alpha).toFixed(),
-    beta: Number.parseFloat(event.beta).toFixed(),
+    alpha: Number.parseFloat(event.alpha).toFixed(5),
+    beta: Number.parseFloat(event.beta).toFixed(5),
   }
 
   ws.send(JSON.stringify({x: data.alpha, y: data.beta}))  ;
