@@ -13,11 +13,6 @@ app.use(express.static(path.join(__dirname + '/../static')))
 
 const clients = [];
 
-// const client = {
-//   isController: true,
-//   data: null
-// }
-
 wss.on('connection', (ws) => {
 
   clients.push(ws);
