@@ -25,7 +25,7 @@ const main = () => {
 }
 
 const drawDot = (el, {x,y}) => {
-  el.style.transform = `translate(${x * speedIndex}px, ${y * speedIndex}px)`
+  el.style.transform = `translate(${x * -speedIndex}px, ${y * -speedIndex}px)`
 }
 
 const handleOrinationChange = (event) => {
