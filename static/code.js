@@ -38,6 +38,7 @@ const main = () => {
         }
 
         json.innerHTML = message.data;
+        lastPosition = {lastX: x, lastY: y};
         drawDot(dotEl, {x: position.x, y: position.y});
       } else {
         lastPosition = {lastX: x, lastY: y};
