@@ -33,7 +33,7 @@ ws.onopen = (res) => {
 }
 
 ws.onmessage = (message) => {
-  // console.log('message', message);
+  console.log('message', message);
 }
 
 // document.addEventListener('mousemove', (event) => {

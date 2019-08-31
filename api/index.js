@@ -16,13 +16,14 @@ const clients = [];
 wss.on('connection', (ws) => {
 
   clients.push(ws);
+  console.log('new user joined');
 
   // setInterval(() => {
   //   console.log(`Number of clients: ${clients.length}`);
   // }, 2000);
-  // ws.on('message', (message) => {
-    
-  // })
+  ws.on('message', (message) => {
+    console.log(message);
+  })
 
   ws.send('new user joined us');
 });
