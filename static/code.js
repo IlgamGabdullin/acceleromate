@@ -16,7 +16,7 @@ const main = () => {
     ws.onmessage = (message) => {
       let { x, y } = JSON.parse(message.data);
 
-      drawDot(dotEl, {x, y});
+      drawDot(dotEl, {x: x - 180, y});
     }
   }
 }
