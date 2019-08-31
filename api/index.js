@@ -11,16 +11,24 @@ const wss = new WebSocket.Server({server});
 
 app.use(express.static(path.join(__dirname + '/../static')))
 
+let clients = [];
+
+const sendAll = (message) => {
+  clients.forEach((client) => {
+    client.send(message);
+  })
+}
 
 wss.on('connection', (ws) => {
 
+  clients.push(ws);
+
   ws.on('message', (message) => {
     console.log(message);
-    ws.send(message);
+    sendAll(message);
   })
 
 });
-
 
 app.get('/index', (req, res) => {
   return res.sendFile( path.join(__dirname + '/../index.html'));
