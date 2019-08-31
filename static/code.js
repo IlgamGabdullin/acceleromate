@@ -15,11 +15,10 @@ const main = () => {
 
     console.log('started');
     ws.onmessage = (message) => {
-      // let { x, y } = JSON.parse(message.data);
-      // console.log({x, y});
-      // json.innerHTML = JSON.stringify(message.data);
-      console.log('data');
-      drawDot(dotEl, {x: 100, y: 200});
+      let { x, y } = JSON.parse(message.data);
+      console.log({x, y});
+      json.innerHTML = JSON.stringify(message.data);
+      drawDot(dotEl, {x, y});
     }
   }
 }
