@@ -17,9 +17,9 @@ wss.on('connection', (ws) => {
 
   clients.push(ws);
 
-  setInterval(() => {
-    console.log(`Number of clients: ${clients.length}`);
-  }, 2000);
+  // setInterval(() => {
+  //   console.log(`Number of clients: ${clients.length}`);
+  // }, 2000);
   // ws.on('message', (message) => {
     
   // })
