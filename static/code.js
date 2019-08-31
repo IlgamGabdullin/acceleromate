@@ -2,19 +2,20 @@ const ws = new WebSocket('wss://acceleromate.herokuapp.com');
 const json = document.querySelector('.json');
 
 
-const speedIndex = window.innerWidth / 180;
+const speedIndex = window.innerWidth / 180 + 3;
 
 const main = () => {
   const isMobile = window.innerWidth < 960;
+  const dotEl = document.querySelector('.dot');
 
   if (isMobile && window.DeviceOrientationEvent) {
 
+    dotEl.remove();
     window.addEventListener('deviceorientation', handleOrinationChange, true);
 
   } 
   
   if (!isMobile) {
-    const dotEl = document.querySelector('.dot');
 
     ws.onmessage = (message) => {
       let { x, y } = JSON.parse(message.data);
