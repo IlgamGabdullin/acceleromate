@@ -36,4 +36,8 @@ app.get('/index', (req, res) => {
   return res.sendFile( path.join(__dirname + '/../index.html'));
 });
 
+app.get('/', (req, res) => {
+  return res.send('friend');
+})
+
 server.listen(port, () => console.log('started'));
