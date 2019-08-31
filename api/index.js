@@ -40,4 +40,4 @@ app.get('/', (req, res) => {
   return res.send('friend');
 })
 
-server.listen(port, () => console.log('started'));
+server.listen(process.env.PORT || 3000, () => console.log('started'));
