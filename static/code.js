@@ -2,7 +2,7 @@ const ws = new WebSocket('wss://acceleromate.herokuapp.com');
 const json = document.querySelector('.json');
 
 
-const speedIndex = 5;
+const speedIndex = window.innerWidth / 180;
 
 const main = () => {
   const isMobile = window.innerWidth < 960;
