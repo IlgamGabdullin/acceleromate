@@ -13,26 +13,23 @@ const main = () => {
   if (!isMobile) {
     const dotEl = document.querySelector('.dot');
 
-    console.log('started');
     ws.onmessage = (message) => {
       let { x, y } = JSON.parse(message.data);
-      console.log({x, y});
-      json.innerHTML = JSON.stringify(message.data);
+      json.innerHTML = message.data;
       drawDot(dotEl, {x, y});
     }
   }
 }
 
 const drawDot = (el, {x,y}) => {
-  el.style.transform = `translate(${x}px, ${y}px)`
+  el.style.transform = `translate(${-x}px, ${-y}px)`
 }
 
 const handleOrinationChange = (event) => {
 
   const data = {
-    alpha: Number.parseFloat(event.alpha).toFixed(2),
-    beta: Number.parseFloat(event.beta).toFixed(2),
-    gamma: Number.parseFloat(event.gamma).toFixed(2),
+    alpha: Number.parseFloat(event.alpha).toFixed(),
+    beta: Number.parseFloat(event.beta).toFixed(),
   }
 
   ws.send(JSON.stringify({x: data.alpha, y: data.beta}))  ;
