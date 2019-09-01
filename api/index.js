@@ -24,7 +24,6 @@ wss.on('connection', (ws) => {
   clients.push(ws);
 
   ws.on('message', (message) => {
-    console.log(message);
     sendAll(message);
   })
 
