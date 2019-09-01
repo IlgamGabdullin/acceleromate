@@ -6,7 +6,6 @@ const ctx = canvas.getContext('2d');
 ctx.beginPath();
 ctx.strokeStyle = "#283593";
 ctx.lineWidth = 5;
-ctx
 
 const dots = [];
 
@@ -53,6 +52,7 @@ const drawLine = (dots) => {
   } else if (dots.length > 1) {
     let { x, y } = dots[dots.length - 1];
     ctx.lineTo(x, y);
+    ctx.lineWidth = 5;
     ctx.stroke();
   }
 }
