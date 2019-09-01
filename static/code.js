@@ -16,7 +16,7 @@ const main = () => {
   if (isMobile && window.DeviceOrientationEvent) {
     dotEl.remove();
     window.addEventListener('deviceorientation', handleOrinationChange, true);
-    window.addEventListener('click', handleMobileClick, true);
+    document.body.addEventListener('click', handleMobileClick, true);
   } 
   
   if (!isMobile) {
@@ -26,8 +26,11 @@ const main = () => {
     ws.onmessage = (message) => {
       let { type, x, y } = JSON.parse(message.data); 
 
+      console.log(type);
+
       if (type === 'setdot') {
         dots.push({x: newPosition.newX, y: newPosition.newY});
+        console.log(dots);
         drawLine(dots);
       } else {
         newPosition = {newX: (x - 180) * -speedIndex, newY: y * -speedIndex};
@@ -61,7 +64,7 @@ const handleOrinationChange = (event) => {
     beta: Number.parseFloat(event.beta).toFixed(5),
   }
 
-  ws.send(JSON.stringify({x: data.alpha, y: data.beta}))  ;
+  ws.send(JSON.stringify({x: data.alpha, y: data.beta}));
 
 }
 
