@@ -3,6 +3,8 @@ const speedIndex = window.innerWidth / 180 + 5;
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 ctx.beginPath();
 ctx.strokeStyle = "#283593";
 ctx.lineWidth = 5;
