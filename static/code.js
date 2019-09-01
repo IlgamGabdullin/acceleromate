@@ -5,7 +5,8 @@ const ctx = canvas.getContext('2d');
 
 ctx.beginPath();
 ctx.strokeStyle = "#283593";
-ctx.lineWidth = 15;
+ctx.lineWidth = 5;
+ctx
 
 const dots = [];
 
@@ -26,10 +27,9 @@ const main = () => {
     ws.onmessage = (message) => {
       let { type, x, y } = JSON.parse(message.data); 
 
-      console.log(type);
-
       if (type === 'setdot') {
-        dots.push({x: newPosition.newX, y: newPosition.newY});
+        const dotPosition = dotEl.getBoundingClientRect();
+        dots.push({x: dotPosition.left , y: dotPosition.top});
         console.log(dots);
         drawLine(dots);
       } else {
