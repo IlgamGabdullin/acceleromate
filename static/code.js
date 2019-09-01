@@ -15,8 +15,8 @@ const main = () => {
 
   if (isMobile && window.DeviceOrientationEvent) {
     dotEl.remove();
-    window.addEventListener('deviceorientation', handleOrinationChange, true);
-    document.body.addEventListener('click', handleMobileClick, true);
+    window.addEventListener('deviceorientation', handleOrinationChange);
+    document.body.addEventListener('click', handleMobileClick);
   } 
   
   if (!isMobile) {
