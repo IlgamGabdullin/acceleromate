@@ -1,5 +1,5 @@
 const ws = new WebSocket('wss://acceleromate.herokuapp.com');
-const speedIndex = window.innerWidth / 180 + 3;
+const speedIndex = window.innerWidth / 180 + 5;
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 
@@ -38,7 +38,7 @@ const main = () => {
 }
 
 const drawDot = (el, {x,y}) => {
-  el.style.transform = `translate(${x * -speedIndex}px, ${y * -speedIndex}px)`
+  el.style.transform = `translate(${x}px, ${y}px)`
 }
 
 
