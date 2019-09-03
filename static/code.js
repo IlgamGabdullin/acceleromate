@@ -2,6 +2,7 @@ const ws = new WebSocket('wss://acceleromate.herokuapp.com');
 const speedIndex = window.innerWidth / 180 + 5;
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
+const mobile = document.querySelector('.mobile');
 
 const fps = 60;
 
@@ -37,11 +38,13 @@ const main = () => {
     dotEl.remove();
     window.addEventListener('deviceorientation', handleOrinationChangeWithDebounce);
     document.body.addEventListener('click', handleMobileClick);
+    mobile.querySelector('button').addEventListener('click', clearCanvas);
   } 
   
   if (!isMobile) {
 
     let newPosition;
+    mobile.remove();
 
     ws.onmessage = (message) => {
       let { type, x, y } = JSON.parse(message.data); 
@@ -57,6 +60,10 @@ const main = () => {
       }
     }
   }
+}
+
+const clearCanvas = () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 const drawDot = (el, {x,y}) => {
