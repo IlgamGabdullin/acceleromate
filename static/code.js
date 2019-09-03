@@ -3,7 +3,7 @@ const speedIndex = window.innerWidth / 180 + 5;
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 
-const fps = 30;
+const fps = 60;
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
