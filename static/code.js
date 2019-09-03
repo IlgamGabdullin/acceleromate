@@ -35,7 +35,7 @@ const main = () => {
 
   if (isMobile && window.DeviceOrientationEvent) {
     dotEl.remove();
-    window.addEventListener('deviceorientation', handleOrinationChange);
+    window.addEventListener('deviceorientation', handleOrinationChangeWithDebounce);
     document.body.addEventListener('click', handleMobileClick);
   } 
   
@@ -48,8 +48,7 @@ const main = () => {
 
       if (type === 'setdot') {
         const dotPosition = dotEl.getBoundingClientRect();
-        dots.push({x: dotPosition.left , y: dotPosition.top});
-        console.log(dots);
+        dots.push({x: dotPosition.left + 20 , y: dotPosition.top + 20});
         drawLine(dots);
       } else {
         x = x > 90 ? x - 360 : x;
@@ -66,13 +65,15 @@ const drawDot = (el, {x,y}) => {
 
 const drawLine = (dots) => {
   if (dots.length === 1) {
-    let { x, y } = dots[0];
+    var { x, y } = dots[0];
     ctx.moveTo(x, y);
+    ctx.arc(x, y, 20, 0, 2 * Math.PI);
   } else if (dots.length > 1) {
-    let { x, y } = dots[dots.length - 1];
+    var { x, y } = dots[dots.length - 1];
+    ctx.arc(x, y, 20, 0, 2 * Math.PI);
     ctx.lineTo(x, y);
-    ctx.lineWidth = 5;
     ctx.stroke();
+    ctx.lineWidth = 5;
   }
 }
 
