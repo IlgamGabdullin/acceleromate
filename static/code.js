@@ -13,6 +13,22 @@ ctx.lineWidth = 5;
 
 const dots = [];
 
+const debounce = (f, ms) => {
+
+  let isCooldown = false;
+
+  return function() {
+    if (isCooldown) return;
+
+    f.apply(this, arguments);
+
+    isCooldown = true;
+
+    setTimeout(() => isCooldown = false, ms);
+  };
+
+}
+
 const main = () => {
   const isMobile = window.innerWidth < 960;
   const dotEl = document.querySelector('.dot');
@@ -77,22 +93,6 @@ const handleMobileClick = (event) => {
   ws.send(JSON.stringify({type: 'setdot'}));
 }
 
-
-const debounce = (f, ms) => {
-
-  let isCooldown = false;
-
-  return function() {
-    if (isCooldown) return;
-
-    f.apply(this, arguments);
-
-    isCooldown = true;
-
-    setTimeout(() => isCooldown = false, ms);
-  };
-
-}
 
 
 document.addEventListener('DOMContentLoaded', main);
