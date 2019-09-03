@@ -3,6 +3,8 @@ const speedIndex = window.innerWidth / 180 + 5;
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 
+const fps = 1;
+
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 ctx.beginPath();
@@ -34,7 +36,8 @@ const main = () => {
         console.log(dots);
         drawLine(dots);
       } else {
-        newPosition = {newX: (x - 180) * -speedIndex, newY: y * -speedIndex};
+        x = x > 90 ? x - 360 : x;
+        newPosition = {newX: x * -speedIndex, newY: y * -speedIndex};
         drawDot(dotEl, {x: newPosition.newX, y: newPosition.newY});
       }
     }
@@ -44,8 +47,6 @@ const main = () => {
 const drawDot = (el, {x,y}) => {
   el.style.transform = `translate(${x}px, ${y}px)`
 }
-
-
 
 const drawLine = (dots) => {
   if (dots.length === 1) {
@@ -70,8 +71,27 @@ const handleOrinationChange = (event) => {
 
 }
 
+const handleOrinationChangeWithDebounce = debounce(handleOrinationChange, 1000 / fps);
+
 const handleMobileClick = (event) => {
   ws.send(JSON.stringify({type: 'setdot'}));
+}
+
+
+const debounce = (f, ms) => {
+
+  let isCooldown = false;
+
+  return function() {
+    if (isCooldown) return;
+
+    f.apply(this, arguments);
+
+    isCooldown = true;
+
+    setTimeout(() => isCooldown = false, ms);
+  };
+
 }
 
 
