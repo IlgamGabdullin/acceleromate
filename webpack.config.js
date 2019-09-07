@@ -26,7 +26,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new CopyPlugin([
-      { from: './index.html' }
+      { from: './src/*.html', flatten: true }
     ])
   ]
 }
