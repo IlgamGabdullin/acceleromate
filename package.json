@@ -5,7 +5,7 @@
   "main": "code.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack && node api/index.js",
+    "start": "node api/index.js",
     "build": "webpack",
     "dev": "webpack-dev-server"
   },
