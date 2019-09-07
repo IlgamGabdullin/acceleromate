@@ -9,7 +9,7 @@ const port = 3000;
 const server = http.createServer(app);
 const wss = new WebSocket.Server({server});
 
-app.use(express.static(path.join(__dirname + '/../static')))
+app.use(express.static(path.join(__dirname + '/../build')))
 
 let clients = [];
 
