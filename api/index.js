@@ -30,7 +30,7 @@ wss.on('connection', (ws) => {
 });
 
 app.get('/index', (req, res) => {
-  return res.sendFile( path.join(__dirname + '/../index.html'));
+  return res.sendFile( path.join(__dirname + '/../build/index.html'));
 });
 
 app.get('/', (req, res) => {

@@ -1,10 +1,11 @@
+import { debounce } from './utilities';
+import { fps } from './app.const'
+
 const ws = new WebSocket('wss://acceleromate.herokuapp.com');
 const speedIndex = window.innerWidth / 180 + 5;
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 const mobile = document.querySelector('.mobile');
-
-const fps = 60;
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -14,21 +15,7 @@ ctx.lineWidth = 5;
 
 const dots = [];
 
-const debounce = (f, ms) => {
 
-  let isCooldown = false;
-
-  return function() {
-    if (isCooldown) return;
-
-    f.apply(this, arguments);
-
-    isCooldown = true;
-
-    setTimeout(() => isCooldown = false, ms);
-  };
-
-}
 
 const main = () => {
   const isMobile = window.innerWidth < 960;
