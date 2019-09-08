@@ -1,93 +1,19 @@
-import { debounce } from './utilities';
-import { fps } from './app.const'
+import { MobileController } from './MobileController';
+import { DesktopController } from './DesktopController';
 
 const ws = new WebSocket('wss://acceleromate.herokuapp.com');
-const speedIndex = window.innerWidth / 180 + 5;
-const canvas = document.querySelector('canvas');
-const ctx = canvas.getContext('2d');
-const mobile = document.querySelector('.mobile');
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-ctx.beginPath();
-ctx.strokeStyle = "#283593";
-ctx.lineWidth = 5;
-
-const dots = [];
-
-
 
 const main = () => {
+  let appController;
   const isMobile = window.innerWidth < 960;
-  const dotEl = document.querySelector('.dot');
-
+  
   if (isMobile && window.DeviceOrientationEvent) {
-    dotEl.remove();
-    window.addEventListener('deviceorientation', handleOrinationChangeWithDebounce);
-    document.body.addEventListener('click', handleMobileClick);
-    mobile.querySelector('button').addEventListener('click', clearCanvas);
+    appController = new MobileController(ws);
   } 
   
   if (!isMobile) {
-
-    let newPosition;
-    mobile.remove();
-
-    ws.onmessage = (message) => {
-      let { type, x, y } = JSON.parse(message.data); 
-
-      if (type === 'setdot') {
-        const dotPosition = dotEl.getBoundingClientRect();
-        dots.push({x: dotPosition.left + 20 , y: dotPosition.top + 20});
-        drawLine(dots);
-      } else {
-        x = x > 90 ? x - 360 : x;
-        newPosition = {newX: x * -speedIndex, newY: y * -speedIndex};
-        drawDot(dotEl, {x: newPosition.newX, y: newPosition.newY});
-      }
-    }
+    appController = new DesktopController(ws);
   }
 }
-
-const clearCanvas = () => {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
-
-const drawDot = (el, {x,y}) => {
-  el.style.transform = `translate(${x}px, ${y}px)`
-}
-
-const drawLine = (dots) => {
-  if (dots.length === 1) {
-    var { x, y } = dots[0];
-    ctx.moveTo(x, y);
-    ctx.arc(x, y, 20, 0, 2 * Math.PI);
-  } else if (dots.length > 1) {
-    var { x, y } = dots[dots.length - 1];
-    ctx.arc(x, y, 20, 0, 2 * Math.PI);
-    ctx.lineTo(x, y);
-    ctx.stroke();
-    ctx.lineWidth = 5;
-  }
-}
-
-const handleOrinationChange = (event) => {
-
-  const data = {
-    alpha: Number.parseFloat(event.alpha).toFixed(5),
-    beta: Number.parseFloat(event.beta).toFixed(5),
-  }
-
-  ws.send(JSON.stringify({x: data.alpha, y: data.beta}));
-
-}
-
-const handleOrinationChangeWithDebounce = debounce(handleOrinationChange, 1000 / fps);
-
-const handleMobileClick = (event) => {
-  ws.send(JSON.stringify({type: 'setdot'}));
-}
-
-
 
 document.addEventListener('DOMContentLoaded', main);

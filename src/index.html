@@ -42,14 +42,20 @@
     }
   </style>
   <body>
-    <div class="mobile">
-      <button> Clear Canvas</button>
-    </div>
-    <div class="dot"></div>
-    <div class="canvas">
-      <canvas></canvas>
-    </div>
-    <div class="test"></div>
+    <div class="app"></div>
+
+    <template data-app="mobile">
+      Try to tap couple times
+    </template>
+
+
+    <template data-app="desktop">
+      <div class="dot"></div>
+      <div class="canvas">
+        <canvas></canvas>
+      </div>
+    </template>
+
     <script src="./bundle.js"></script>
   </body>
 </html>
