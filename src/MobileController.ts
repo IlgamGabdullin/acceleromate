@@ -11,7 +11,7 @@ export class MobileController extends AppController {
   }
 
   private init() {
-    this.appEl.appendChild(document.querySelector('template[data-app="mobile"]'))
+    this.appEl.innerHTML = document.querySelector('template[data-app="mobile"]').innerHTML;
 
     window.addEventListener('deviceorientation', this.handleOrinationChangeWithDebounce);
     document.body.addEventListener('click', this.handleMobileClick);
