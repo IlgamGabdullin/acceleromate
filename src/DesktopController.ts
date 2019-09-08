@@ -32,23 +32,25 @@ export class DesktopController extends AppController {
         this.drawLine(this.dots);
       } else {
         x = x > 90 ? x - 360 : x;
-        this.drawDot(this.dotEl, {x: x * -this.speedIndex, y: y * -this.speedIndex});
+        requestAnimationFrame(() => {
+          this.drawDot(this.dotEl, {x: x * -this.speedIndex, y: y * -this.speedIndex});
+        });
       }
     }
   }
 
   private drawDot = (el, {x,y}) => {
-    el.style.transform = `translate(${x}px, ${y}px)`
+    el.style.transform = `translate3d(${x}px, ${y}px, 0)`
   }
   
   private drawLine = (dots) => {
     if (dots.length === 1) {
       var { x, y } = dots[0];
       this.ctx.moveTo(x, y);
-      this.ctx.arc(x, y, 20, 0, 2 * Math.PI);
+      // this.ctx.arc(x, y, 20, 0, 2 * Math.PI);
     } else if (dots.length > 1) {
       var { x, y } = dots[dots.length - 1];
-      this.ctx.arc(x, y, 20, 0, 2 * Math.PI);
+      // this.ctx.arc(x, y, 20, 0, 2 * Math.PI);
       this.ctx.lineTo(x, y);
       this.ctx.stroke();
       this.ctx.lineWidth = 5;
