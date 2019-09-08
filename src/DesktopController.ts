@@ -1,4 +1,5 @@
 import { AppController } from './AppController.abstract';
+import { Dot } from './app.interfaces';
 
 export class DesktopController extends AppController {
   private dotEl: HTMLElement;
@@ -7,21 +8,19 @@ export class DesktopController extends AppController {
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D
 
-  constructor(
-    private ws: WebSocket,
-  ) {
+  constructor() {
     super();
     this.init();
   }
 
   private init = () => {
-
+    // Idea: maybe its all should be custom elements
     this.appEl.innerHTML = document.querySelector('template[data-app="desktop"]').innerHTML;
 
     this.initCanvasConfig();
 
     this.speedIndex = window.innerWidth / 180 + 5;
-    this.dotEl = document.querySelector('.dot');
+    this.dotEl = this.appEl.querySelector('.dot');
 
     this.ws.onmessage = (message) => {
       let { type, x, y } = JSON.parse(message.data); 
@@ -69,7 +68,3 @@ export class DesktopController extends AppController {
   }
 }
 
-interface Dot {
-  x: number;
-  y: number;
-}

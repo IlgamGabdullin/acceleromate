@@ -1,18 +1,17 @@
 import { MobileController } from './MobileController';
 import { DesktopController } from './DesktopController';
 
-const ws = new WebSocket('wss://acceleromate.herokuapp.com');
-
 const main = () => {
   let appController;
+  // TODO: get better device recognizing
   const isMobile = window.innerWidth < 960;
   
   if (isMobile && window.DeviceOrientationEvent) {
-    appController = new MobileController(ws);
+    appController = new MobileController();
   } 
   
   if (!isMobile) {
-    appController = new DesktopController(ws);
+    appController = new DesktopController();
   }
 }
 

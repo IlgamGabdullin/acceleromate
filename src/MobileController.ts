@@ -3,9 +3,7 @@ import { fps } from "./app.const";
 import { AppController } from "./AppController.abstract";
 
 export class MobileController extends AppController {
-  constructor(
-    private ws: WebSocket
-  ) {
+  constructor() {
     super();
     this.init();
   }
@@ -18,14 +16,12 @@ export class MobileController extends AppController {
   }
 
   private handleOrinationChange = (event) => {
-
     const data = {
       alpha: Number.parseFloat(event.alpha).toFixed(5),
       beta: Number.parseFloat(event.beta).toFixed(5),
     }
   
     this.ws.send(JSON.stringify({x: data.alpha, y: data.beta}));
-  
   }
   
   private handleOrinationChangeWithDebounce = debounce(this.handleOrinationChange, 1000 / fps);
